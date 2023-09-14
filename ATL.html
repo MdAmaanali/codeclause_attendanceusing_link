@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Using Link</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png" type="icon/image">
+</head>
+<body>
+  <header>
+    <h1>Attendance Using Link</h1>
+  </header>
+
+  <main>
+    <section id="login" class="section visible">
+      <h2>Admin Login</h2>
+      <form onsubmit="submitForm('login'); return false;">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+
+        <button type="submit">Login</button>
+      </form>
+    </section>
+
+    <section id="create-link" class="section">
+      <h2>Create Attendance Link</h2>
+      <form onsubmit="submitForm('create-link'); return false;">
+        <label for="class">Class:</label>
+        <select id="class" required>
+          <option value="" disabled selected>Select Class</option>
+          <option value="class1">Class 8</option>
+          <option value="class2">Class 9</option>
+          <option value="class3">Class 10</option>
+          <option value="class4">Class 11</option>
+          <option value="class5">Class 12</option>
+          <!-- Add more options for different classes -->
+        </select>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+
+        <label for="time">Time:</label>
+        <input type="time" id="time" required>
+
+        <button type="submit">Create Link</button>
+      </form>
+    </section>
+
+    <section id="student-attendance" class="section">
+      <h2>Student Attendance</h2>
+      <form onsubmit="submitForm('student-attendance'); return false;">
+        <label for="otp">Enter OTP:</label>
+        <p>OTP send to your registered mobile number!</p>
+        <input type="text" id="otp" required>
+
+        <button type="submit">Mark Attendance</button>
+      </form>
+    </section>
+  </main>
+
+
+  <div id="popup" class="popup">Form submitted successfully!</div>
+
+  <div id="fake-link" class="fake-link">Attendance Link: <a href="https://www.jotform.com/223543215783052" target="_blank" id="generated-link">https://www.GOISCHOOL.com/attendance/link</a></div>
+
+  <footer>
+    <p>Contact us at: MYSCHOOL@attendance-link.com</p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    let currentSectionIndex = 0;
+
+    function showPopup(message) {
+      const popup = document.getElementById('popup');
+      popup.innerText = message;
+      popup.style.display = 'block';
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 2000);
+    }
+
+    function showFakeLink() {
+      const fakeLink = document.getElementById('fake-link');
+      fakeLink.style.display = 'block';
+    }
+
+    function submitForm(sectionId) {
+      if (sectionId === 'login') {
+        showPopup('Admin logged in successfully!');
+      } else if (sectionId === 'create-link') {
+        showPopup('Link created successfully!');
+        showFakeLink();
+      } else if (sectionId === 'student-attendance') {
+        showPopup('Attendance marked successfully!');
+      }
+
+      sections[currentSectionIndex].style.display = 'none';
+      currentSectionIndex++;
+      if (currentSectionIndex < sections.length) {
+        sections[currentSectionIndex].style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
